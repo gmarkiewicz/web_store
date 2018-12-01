@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProductDAO {
 
-    public List<Product> serachAllProcudts();
-    public Product serachByName(String name);
+    public List<Product> fetchProcudts();
+    public Product getById(Integer id);
     public void deleteProduct(String name);
     public void deleteAll();
     public void updateUser(Product product);

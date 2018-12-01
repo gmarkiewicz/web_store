@@ -4,14 +4,14 @@ import com.markiewiczgrzegorz.User;
 
 import java.util.List;
 
-public class UserDaoImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
     @Override
-    public List<User> searchAll() {
+    public List<User> fetchUsers() {
         return null;
     }
 
     @Override
-    public User serachByName(String name) {
+    public User getUserById(Integer id) {
         return null;
     }
 

@@ -2,24 +2,21 @@ package com.markiewiczgrzegorz;
 
 
 public class User {
-    public enum Role{
-        ADMIN,
-        USER
-    }
     private Integer id;
-    private String userName;
+    private String username;
     private String password;
     private Double totalCashSpend;
     private String name;
     private String surname;
-    private Role role;
+    private String role;
 
     public User() {
     }
 
-    public User(Integer id, String userName, String password, Double totalCashSpend, String name, String surname, Role role) {
+    public User(Integer id, String userName, String password, Double totalCashSpend, String name,
+                String surname, String role) {
         this.id = id;
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
         this.totalCashSpend = totalCashSpend;
         this.name = name;
@@ -35,12 +32,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -75,11 +72,11 @@ public class User {
         this.surname = surname;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

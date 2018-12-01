@@ -6,12 +6,12 @@ import java.util.List;
 
 public class ProductDAOImpl implements ProductDAO {
     @Override
-    public List<Product> serachAllProcudts() {
+    public List<Product> fetchProcudts() {
         return null;
     }
 
     @Override
-    public Product serachByName(String name) {
+    public Product getById(Integer id) {
         return null;
     }
 
