@@ -5,10 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class JsonPOJO {
+public class DataFromJson {
+
     @SerializedName("users")
     @Expose
     private List<User> users = null;
+
     @SerializedName("products")
     @Expose
     private List<Product> products = null;

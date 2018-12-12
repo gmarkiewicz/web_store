@@ -5,7 +5,7 @@ public class User {
     private Integer id;
     private String username;
     private String password;
-    private Double totalCashSpend;
+    private Double totalCashSpent;
     private String name;
     private String surname;
     private String role;
@@ -13,12 +13,12 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String userName, String password, Double totalCashSpend, String name,
+    public User(Integer id, String userName, String password, Double totalCashSpent, String name,
                 String surname, String role) {
         this.id = id;
         this.username = userName;
         this.password = password;
-        this.totalCashSpend = totalCashSpend;
+        this.totalCashSpent = totalCashSpent;
         this.name = name;
         this.surname = surname;
         this.role = role;
@@ -48,12 +48,12 @@ public class User {
         this.password = password;
     }
 
-    public Double getTotalCashSpend() {
-        return totalCashSpend;
+    public Double getTotalCashSpent() {
+        return totalCashSpent;
     }
 
-    public void setTotalCashSpend(Double totalCashSpend) {
-        this.totalCashSpend = totalCashSpend;
+    public void setTotalCashSpent(Double totalCashSpent) {
+        this.totalCashSpent = totalCashSpent;
     }
 
     public String getName() {
@@ -78,6 +78,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + getId() + "\nUsername: " + getUsername() + "\nPassword: " + getPassword()
+                + "\nTotal cash spent: " + getTotalCashSpent() + "\nName: " + getName() + "\nSurname: "
+                + getSurname() + "\nRole: " + getRole();
     }
 }
 

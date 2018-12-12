@@ -1,28 +1,27 @@
 package com.markiewiczgrzegorz.DAO;
 
 import com.google.gson.Gson;
-import com.markiewiczgrzegorz.JsonPOJO;
+import com.markiewiczgrzegorz.DataFromJson;
 import com.markiewiczgrzegorz.Product;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class ProductDAOJson implements ProductDAO {
+public class ProductJsonDAO implements ProductDAO {
     @Override
     public List<Product> fetchProcudts() {
         List<Product> products = new ArrayList<>();
 
         Gson gson = new Gson();
-        BufferedReader br = null;
+        BufferedReader br;
 
         try{
             br = new BufferedReader(new FileReader("src/main/webapp/WEB-INF/jsonV1.json"));
-            JsonPOJO jsonPOJO = gson.fromJson(br, JsonPOJO.class);
+            DataFromJson dataFromJson = gson.fromJson(br, DataFromJson.class);
 
-            if(jsonPOJO != null){
-                for(Product product : jsonPOJO.getProducts()){
+            if(dataFromJson != null){
+                for(Product product : dataFromJson.getProducts()){
                     products.add(product);
                 }
             }
@@ -38,7 +37,7 @@ public class ProductDAOJson implements ProductDAO {
     }
 
     @Override
-    public void deleteProduct(String name) {
+    public void deleteProduct(Integer id) {
 
     }
 
