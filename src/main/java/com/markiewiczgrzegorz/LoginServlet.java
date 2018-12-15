@@ -30,17 +30,19 @@ public class LoginServlet extends HttpServlet {
 
 
         Boolean loggedIn = false;
-        for (User user : users) {
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
             String loginDB = user.getUsername();
             String passwordDB = user.getPassword();
 
-            if (user != null && login.equals(loginDB)
+            if ( user!= null && login.equals(loginDB)
                     && password != null && password.equals(passwordDB)) {
                 createCookie(response, user);
 
                 request.getSession().setAttribute("userRole", user.getRole());
                 response.sendRedirect("/Products");
                 loggedIn = true;
+                break;
             }
         }
 

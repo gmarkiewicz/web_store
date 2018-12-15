@@ -25,15 +25,15 @@ public class RegisterServlet extends HttpServlet {
         String pwd = request.getParameter("pwd");
 
         boolean userExists = false;
-        for(User user: users){
-            if (user.getUsername().equalsIgnoreCase(username)){
+        for (User user : users) {
+            if (user.getUsername().equalsIgnoreCase(username)) {
                 userExists = true;
                 break;
             }
         }
 
-        if(userExists == false) {
-            newUser.setId(users.size() + 1);
+        if (userExists == false) {
+            newUser.setId(users.get(users.size() - 1).getId() + 1);
             newUser.setUsername(username);
             newUser.setName(name);
             newUser.setSurname(surname);
@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
             newUser.setTotalCashSpent(0.0);
             newUser.setRole("user");
 
-            userDAO.addUser(newUser);
+            userDAO.updateUser(newUser);
 
             RequestDispatcher reqDips = request.getRequestDispatcher("/index.jsp");
             reqDips.forward(request, response);

@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.List;
 
 public class UserJsonDAO implements UserDAO {
-    public static final String JsonPath = "/WEB-INF/jsonV1.json";
+    private static final String JsonPath = "/WEB-INF/jsonV1.json";
     private ContextConfiguration config = ContextConfiguration.getInstance();
     private InputStream input = config.getContext().getResourceAsStream(JsonPath);
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
@@ -38,6 +38,7 @@ public class UserJsonDAO implements UserDAO {
         for (User jsonUser : users) {
             if (jsonUser.getId().equals(id)) {
                 user = jsonUser;
+                break;
             }
         }
         return user;
@@ -45,33 +46,58 @@ public class UserJsonDAO implements UserDAO {
 
     @Override
     public void deleteUser(Integer id) {
-        
+        for (User user : users) {
+            if(user.getId().equals(id)){
+                int index = users.indexOf(user);
+                users.remove(index);
+                break;
+            }
+        }
+        for(int i = 0; i < users.size(); i++){
+            users.get(i).setId(i +1);
+        }
+        updateJson(users);
     }
 
     @Override
     public void deleteAll() {
-
+        users.clear();
+        updateJson(users);
     }
 
     @Override
     public void updateUser(User user) {
-
+        boolean userExcist = false;
+        int index = 0;
+        for(int i = 0; i < users.size(); i++) {
+            User jsonUser = users.get(i);
+            if (jsonUser.getId().equals(user.getId())) {
+                userExcist = true;
+                index = i;
+                break;
+            }
+        }
+        if(userExcist){
+            users.set(index ,user);
+        }else{
+            users.add(user);
+        }
+        updateJson(users);
     }
 
-    @Override
-    public void addUser(User user){
-        users.add(user);
+    private void updateJson(List<User> users) {
         dataFromJson.setUsers(users);
         String path = config.getContext().getRealPath(JsonPath);
 
         try{
-        FileWriter writeToServer = new FileWriter(path);
-        gson.toJson(dataFromJson, writeToServer);
-        writeToServer.flush();
-        writeToServer.close();
-        bufferedReader.close();
+            FileWriter writeToServer = new FileWriter(path);
+            gson.toJson(dataFromJson, writeToServer);
+            writeToServer.flush();
+            writeToServer.close();
+            bufferedReader.close();
         }catch (IOException e){
             e.printStackTrace();
         }
     }
+
 }

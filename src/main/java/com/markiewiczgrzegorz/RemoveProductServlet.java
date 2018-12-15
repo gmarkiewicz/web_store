@@ -12,17 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/Products", name = "ProductsServlet")
-public class ProductsServlet extends HttpServlet {
-
-    @Override
+@WebServlet(urlPatterns = "/Remove", name = "RemoveProductServlet")
+public class RemoveProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO productDAO = new ProductJsonDAO();
-        List<Product> productList = productDAO.getAllProducts();
+        int productId = Integer.valueOf(request.getParameter("Index"));
 
-        request.getSession().setAttribute("products", productList);
+        productDAO.deleteProduct(productId);
 
-        RequestDispatcher reqDisp = request.getRequestDispatcher("store.jsp");
+        RequestDispatcher reqDisp = request.getRequestDispatcher("/Products");
         reqDisp.forward(request, response);
     }
 

@@ -8,13 +8,14 @@
 </head>
 <body>
 <%
+    String userRole = (String) request.getSession().getAttribute("userRole");
     String userName = null;
     Cookie[] cookies = request.getCookies();
     if (cookies != null){
         for(Cookie cookie: cookies){
             if(cookie.getName().equals("login")){
                 userName = cookie.getValue();
-
+                break;
             }
         }
     }
@@ -33,7 +34,7 @@
 
 <table>
     <tr>
-        <td>LP</td>
+        <td>ID</td>
         <td>Nazwa</td>
         <td>Opis</td>
         <td>Cena</td>
@@ -51,12 +52,18 @@
         <td><%=product.getQuantity()%></td>
         <td><button>Add to Cart</button></td>
         <%
-            String userRole = (String) request.getSession().getAttribute("userRole");
             if (userRole.equals("admin")){
         %>
-        <td><button>Edit</button></td>
-        <td><button>Remove</button></td>
+        <td><a href=<%="\"/editProduct.jsp?Index=" + product.getId() + "\""%>><button>Edytuj</button></a></td>
+        <td><a href=<%="\"/Remove?Index=" + product.getId() + "\""%>><button>Usun</button></a></td>
         <%}%>
+    </tr>
+    <%}%>
+    <%
+        if (userRole.equals("admin")){
+    %>
+    <tr>
+        <td><a href="/addProduct.jsp"><button>Dodaj produkt</button></a></td>
     </tr>
     <%}%>
 </table>
